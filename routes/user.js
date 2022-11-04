@@ -6,9 +6,11 @@ const user = {
   mail: "test@mail.ru"
 }
 
-router.post('/login', (req, res) => { 
-  res.status(201)
-  res.json({user})
+router.get('/login', (req, res) => {
+  res.render('users/user', {
+      title: 'Авторизация',
+      user: user
+  })
 })
 
 module.exports = router

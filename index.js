@@ -4,16 +4,18 @@ const logger = require('./middleware/logger')
 const error404 = require('./middleware/err-404')
 const userRouter = require('./routes/user')
 const booksRouter = require('./routes/books')
-
+const indexRouter = require('./routes/index')
 
 const app = express()
-app.use(express.json())
+app.use(express.urlencoded())
+app.set('view engine', 'ejs')
 
 app.use(logger)
 
-app.use('/api/user', userRouter)
-app.use('/api/books', booksRouter)
-//app.use('/download', express.static(__dirname + '/public'));
+app.use('/', indexRouter)
+app.use(express.static(__dirname + '/src/css/'))
+app.use('/user', userRouter)
+app.use('/books', booksRouter)
 
 app.use(error404)
 
