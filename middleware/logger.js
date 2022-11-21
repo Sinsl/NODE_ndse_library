@@ -7,9 +7,12 @@ module.exports = (req, res, next) => {
 
   const data = `${now} ${method} ${url}`
 
-  fs.appendFile("server.log", data + os.EOL, (err) => {
-    if (err) throw err;
-  })
+  if (url !== '/style.css') {
+    fs.appendFile("server.log", data + os.EOL, (err) => {
+      if (err) throw err;
+    })
+  }
+  
 
   next();
 }

@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: #787878;
+}
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+p {
+  line-height: 1.5;
+}
+.navbar {
+  display: flex;
+  padding: 30px;
+}
+.navbar-brand {
+  color: black;
+  padding-right: 20px;
+}
+.navbar-nav {
+  border-left: 1px solid #aaa;
+  padding-left: 20px;
+}
+.navbar-nav li{
+  list-style: none;
+  display: inline;
+  margin-right: 20px;
+}
+.main {
+  max-width: 800px;
+  margin: 10px auto;
+}
+.title-box {
+  
+}
+.title {
+  background-color: #eee;
+  padding: 20px 30px;
+}
+.users {
+  padding: 0 20px;
+}   
+.welcome{
+  margin: 10px 0;
+  font-size: 20px;
+}
+.btn-box {
+  margin: 20px 0;
+}
+.btn {
+  background-color: darkgreen;
+  color: #fff;
+  padding: 10px 20px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+} 
+.table-header td{
+  padding: 10px 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+.table-header {
+  border-bottom: 2px solid #787878;
+}
+.table-item {
+  border-bottom: 1px dashed #787878;
+}
+.table-body td {
+  padding: 10px 0;
+}
+.f-inline{
+  display: inline;
+}
+.icon-line {
+  display: flex;
+  justify-content: end;
+}
+.btn-i {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #aaa;
+  margin-right: 20px;
+  color: #fff;
+  text-align: center;
+}
+.eye {
+  background-color: darkgreen;
+}
+.pencil {
+  background-color: rgb(22, 22, 105);
+}
+.trash {
+  background-color: rgb(94, 4, 4);
+}
+.eye i, .pencil i {
+  margin-top: 5px;
+}
+.book-box {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #eee;
+
+}
+.book-box h3 {
+  font-size: 28px;
+  font-weight: 500;
+}
+.book-box p {
+  margin-top: 10px;
+}
+.create-book {
+  width: 300px;
+}
+.create-book label {
+  display: block;
+  margin: 10px 0;
+  width: 100%;
+}
+.create-book input {
+  width: 100%;
+}
+.create-book textarea {
+  width: 100%;
+}
+.create-book button {
+  clear: both;
+}

@@ -1,0 +1,31 @@
+
+<form class="create-book" method="POST" enctype="multipart/form-data">
+  <div>
+    <label>
+      <p>Название книги</p>
+      <input type="text" name="title" value="<%= book.title %>">
+    </label>
+    <label>
+      <p>Описание книги</p>
+      <textarea name="description" rows="5"><%= book.description %></textarea>
+    </label>
+    <label>
+      <p>Автор книги</p>
+      <input type="text" name="authors" value="<%= book.authors %>">
+    </label>
+    <label>
+      <p>favorite</p>
+      <input type="text" name="favorite" autocomplete="on" value="<%= book.favorite %>">
+    
+    </label>
+    <label>
+      <p>fileCover</p>
+      <input type="text" name="fileCover" value="<%= book.fileCover %>">
+    </label>
+    <label for="file-input">Выберите файл</label>
+    <input id="file-input" type="file" name="fileBook" multiple>
+    <div class="btn-box">
+      <button class="btn" type="submit" >Сохранить</button> 
+    </div>
+  </div>
+</form>
