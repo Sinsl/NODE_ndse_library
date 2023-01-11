@@ -7,7 +7,7 @@ const booksRouter = require('./routes/books')
 const indexRouter = require('./routes/index')
 
 const app = express()
-app.use(express.urlencoded())
+//app.use(express.urlencoded())
 app.set('view engine', 'ejs')
 
 app.use(logger)
