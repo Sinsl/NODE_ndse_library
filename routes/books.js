@@ -3,9 +3,9 @@ const router = express.Router()
 const { v4: uuid } = require('uuid')
 const fileMulter = require('../middleware/file')
 const fs = require('fs')
-
+const counter = require('./requestCount')
 class Book {
-    constructor(title = "", description = "", authors = "", favorite = "", fileCover = "", fileName = "", fileBook = "", id = uuid()) {
+    constructor(title = "", description = "", authors = "", id = 'b69f8e31-', favorite = "", fileCover = "", fileName = "", fileBook = "") {
         this.title = title
         this.description = description
         this.authors = authors
@@ -13,13 +13,17 @@ class Book {
         this.fileCover = fileCover
         this.fileName = fileName
         this.fileBook = fileBook
-        this.id = id
+        if (id === 'b69f8e31-') {
+          this.id = id + (Math.floor(Math.random() * 1000) + 1);
+        } else {
+          this.id = id;
+        }
     }
 }
 const stor = {
     books: [
-        new Book('Понедельник начинается в субботу', 'Юмористическая повесть', 'Братья Стругацкие'),
-        new Book('Мастер и Маргарита', 'Роман в русле магического реализма', 'М.А. Булгаков'),
+        new Book('Понедельник начинается в субботу', 'Юмористическая повесть', 'Братья Стругацкие', 'b69f8e31-45ds'),
+        new Book('Мастер и Маргарита', 'Роман в русле магического реализма', 'М.А. Булгаков', 'b69f8e31-89tf'),
     ],
 };
 
@@ -67,10 +71,26 @@ router.get('/:id', (req, res) => {
         res.redirect('/err404')
     } 
     
-    res.render('books/view', {
-      title: 'Просмотр книги',
-      book: books[idx]
-    })
+    
+    counter.getCounter(id, (resp) => {
+      if (resp.statusCode !== 500) {
+        resp.on('data', (d) => {
+          console.log(`Запрос счетчика прошел успешно, cnt - ${JSON.parse(d).count}`);
+          res.render('books/view', {
+            title: 'Просмотр книги',
+            book: books[idx],
+            count: Number(JSON.parse(d).count) + 1
+          })
+        })
+        counter.setCounter(id);
+      } else {
+        res.render('books/view', {
+          title: 'Просмотр книги',
+          book: books[idx],
+          count: ''
+        })
+      }
+    });
 })
 
 router.get('/:id/download', (req, res) => {
