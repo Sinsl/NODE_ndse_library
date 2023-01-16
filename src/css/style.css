@@ -137,3 +137,12 @@ p {
 .create-book button {
   clear: both;
 }
+.counter {
+  font-size: 18px;
+  margin: 10px 0;
+}
+.count {
+  color: 	#008000;
+  margin-left: 10px;
+  font-weight: bold;
+}
