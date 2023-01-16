@@ -3,7 +3,9 @@
 
 <div class="title-box"><h1 class="title"><%= title %></h1></div>
 
-<%- include('form') %>
+<form action="/api/books" class="create-book" method="post" enctype="multipart/form-data">
+  <%- include('form') %>
+</form>
 
 
 <%- include('../port/layout-end') %>
