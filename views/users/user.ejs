@@ -4,9 +4,14 @@
 <div class="title-box"><h1 class="title"><%= title %></h1></div>
 
 <div class="users">
-  <div class="welcome">Добро пожаловать, пользователь!</div>
-  <div>Пользователь id: <%= user.id %></div>
-  <div>Почта: <%= user.mail %></div>
+  <% if (!user) {%>
+    <div class="welcome">Добро пожаловать, Гость!</div>
+    <div class="lgn"><a href="/user/login" class="btn"> Вход </a></div>
+    <div class="lgn"><a href="/user/register" class="btn"> Регистрация </a></div>
+  <% } else { %>
+  <div class="welcome">Добро пожаловать, <%= user.nickname %>!</div>
+  <div>Перейти в <a href="/user/profile"> профиль </a>.</div>
+  <% } %>
 </div>
 
 <%- include('../port/layout-end') %>

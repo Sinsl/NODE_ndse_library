@@ -1,7 +1,5 @@
 const express = require('express')
 const router = express.Router() 
-const fileMulter = require('../middleware/file')
-const fs = require('fs')
 const counter = require('./requestCount')
 
 const Books = require('../models/books')

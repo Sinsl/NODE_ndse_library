@@ -9,6 +9,7 @@ const Books = require('../models/books')
 router.post('/',
   fileMulter.single('fileBook'),
   async (req, res) => {
+    console.log(req.body)
     const {title, description, authors, favorite, fileCover} = req.body
     let fileName = ""
     let filePath = ""
@@ -32,6 +33,7 @@ router.post('/update/:id',
   async (req, res) => {
     console.log('Попали в метод пут правильно')
     const { id } = req.params
+    console.log(req.body)
     const { title, description, authors, favorite, fileCover } = req.body
     try {
       const books = await Books.findById(id).select('-__v');

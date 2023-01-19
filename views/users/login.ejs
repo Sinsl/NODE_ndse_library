@@ -1,0 +1,21 @@
+<%- include('../port/layout-start', {title: title}) %>
+<%- include('../port/menu') %>
+
+<div class="title-box"><h1 class="title"><%= title %></h1></div>
+
+<form action="/user/login" class="create-book" method="post" >
+  <div>
+    <label>Емейл:</label>
+    <input type="email" name="email"/> <br />
+  </div>
+  <div>
+    <label>Пароль:</label>
+    <input type="password" name="password"/> <br />
+  </div>
+  <div class="btn-box">
+    <button class="btn" type="submit" >Отправить</button> 
+  </div>
+</form>
+
+
+<%- include('../port/layout-end') %>
