@@ -30,7 +30,7 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', 
-passport.authenticate('signup', { failureRedirect: '/user/login', failureMessage: true }),
+passport.authenticate('signup', { failureRedirect: '/user/register', failureMessage: true }),
 (req, res) => {
   console.log(req.user)
   res.redirect('/user')
