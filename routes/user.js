@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const passport = require('passport')
-const User = require('../models/user')
+const passport = require('../middleware/user')
+//const { autLogin, autRegister } = require('../middleware/authenticate')
 
 router.get('/', (req, res) => {
   res.render('users/user', {
@@ -17,6 +17,7 @@ router.get('/login', (req, res) => {
 })
 
 router.post('/login', 
+//autLogin,
 passport.authenticate('local', { failureRedirect: '/user/login', failureMessage: true }),
 (req, res) => {
   console.log(req.user)
@@ -29,7 +30,8 @@ router.get('/register', (req, res) => {
   })
 })
 
-router.post('/register', 
+router.post('/register',
+//autRegister,
 passport.authenticate('signup', { failureRedirect: '/user/register', failureMessage: true }),
 (req, res) => {
   console.log(req.user)

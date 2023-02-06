@@ -20,8 +20,6 @@ services:
   mongo:
     image: mongo
     restart: always
-    volumes:
-      - ./mongodatabase:/data/bd
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
