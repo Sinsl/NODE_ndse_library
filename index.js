@@ -10,8 +10,12 @@ const userRouter = require('./routes/user')
 const booksRouter = require('./routes/books')
 const indexRouter = require('./routes/index')
 const apiBooksRouter = require('./routes/apiBooks')
+const http = require('http')
+const socketIO = require('socket.io')
 
 const app = express()
+const server = http.Server(app)
+const io = socketIO(server)
 app.use(express.json())
 app.use(express.urlencoded())
 app.set('view engine', 'ejs')
@@ -34,7 +38,7 @@ mongoose.set('strictQuery', false);
 async function start (PORT, UrlBD) {
   try {
     await mongoose.connect(UrlBD);
-    app.listen(PORT);
+    server.listen(PORT);
     console.log(`Сервер запущен: внешний порт 8080, подключен к БД через порт ${UrlBD}`);
   } catch (e) {
     console.log('Ошибка подключения БД ', e);

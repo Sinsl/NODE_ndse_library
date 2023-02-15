@@ -35,11 +35,11 @@ router.get('/:id', async (req, res) => {
       counter.getCounter(id, (resp) => {
         if (resp.statusCode !== 500) {
           resp.on('data', (d) => {
-            console.log(`Запрос счетчика прошел успешно, cnt - ${JSON.parse(d).count}`);
             res.render('books/view', {
               title: 'Просмотр книги',
               book: books,
-              count: Number(JSON.parse(d).count) + 1
+              count: Number(JSON.parse(d).count) + 1,
+              user: req.user
             })
           })
           counter.setCounter(id);
