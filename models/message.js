@@ -17,10 +17,11 @@ const messageSchema = new Schema(
     userName: {
       type: String,
       required: true
+    },
+    datetime: {
+      type: String,
+      required: true
     }
-  },
-  {
-    timestamps: true
   })
 
 module.exports = model('Message', messageSchema);

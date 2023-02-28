@@ -3,6 +3,7 @@ const router = express.Router()
 const counter = require('./requestCount')
 
 const Books = require('../models/books')
+const Message = require('../models/message')
 
 router.get('/', async (req, res) => {
   try {
@@ -31,6 +32,7 @@ router.get('/:id', async (req, res) => {
       if(!books) {
         res.redirect('/err404')
       } 
+      const messages = await Message.find({roomId: id}).select('-__v')
     
       counter.getCounter(id, (resp) => {
         if (resp.statusCode !== 500) {
@@ -39,7 +41,8 @@ router.get('/:id', async (req, res) => {
               title: 'Просмотр книги',
               book: books,
               count: Number(JSON.parse(d).count) + 1,
-              user: req.user
+              user: req.user,
+              arrMsg: messages
             })
           })
           counter.setCounter(id);
@@ -47,6 +50,7 @@ router.get('/:id', async (req, res) => {
           res.render('books/view', {
             title: 'Просмотр книги',
             book: books,
+            arrMsg: messages,
             count: ''
           })
         }

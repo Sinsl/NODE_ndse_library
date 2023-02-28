@@ -16,6 +16,7 @@ const socketIO = require('socket.io')
 const app = express()
 const server = http.Server(app)
 const io = socketIO(server)
+
 app.use(express.json())
 app.use(express.urlencoded())
 app.set('view engine', 'ejs')
@@ -27,13 +28,37 @@ app.use(logger)
 
 app.use('/', indexRouter)
 app.use(express.static(__dirname + '/src/css/'))
+app.use(express.static(__dirname + '/src/js/'))
 app.use('/user', userRouter)
 app.use('/books', booksRouter)
 app.use('/api/books', apiBooksRouter)
 
 app.use(error404)
 
+
+
+
 mongoose.set('strictQuery', false);
+
+io.on('connection', socket => {
+  const {id} = socket
+  console.log('connection: ' + id);
+  const {roomName} = socket.handshake.query
+  if (roomName) {
+    console.log(`Комната: ${roomName}`)
+    socket.join(roomName)
+    socket.on('message-book', (message) => {
+      message.type = `roomName: ${roomName}`
+      socket.to(roomName).emit('message-book', message)
+      socket.emit('message-book', message)
+    })
+  }
+
+  socket.on('disconnect', () => {
+    console.log('disconnect ' + id)
+  })
+})
+
 
 async function start (PORT, UrlBD) {
   try {

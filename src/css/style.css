@@ -152,3 +152,94 @@ p {
   margin-left: 10px;
   font-weight: bold;
 }
+
+.messages-block {
+  width: 100%;
+  margin-top: 50px;
+  padding: 0 0 20px;
+  border: 1px solid #eee;
+}
+.messages-block h4 {
+  font-size: 20px;
+  text-align: center;
+  border-bottom: 2px solid #eee;
+  padding: 20px;
+}
+.dispatched,
+.received {
+  width: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #F8F8F8;
+  margin: 15px auto;
+  border: 1px solid #ddd;
+}
+.dispatched {
+  background-color: #E6FCE6;
+}
+.message-header {
+  border-bottom: 1px dashed #aaa;
+  padding: 5px 0;
+}
+.message-date {
+  font-size: 12px;
+}
+.message-name {
+  margin: 0 10px;
+  color: #008000;
+}
+.message-userId {
+  display: none;
+}
+.message-text {
+  margin: 10px 5px;
+}
+.message-send-block {
+  width: 100%;
+  margin-top: 30px;
+  text-align: center;
+}
+.message-send-block h4 {
+  font-size: 16px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding: 15px;
+}
+.message-send {
+  width: 80%;
+  margin: 20px auto;
+}
+.message-send p {
+  font-size: 20px;
+  color: 	#008000;
+}
+.story {
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #aaa;
+  padding: 10px;
+}
+.message-send-auth {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: 30px;
+}
+.message-send-login p {
+  margin-top: 20px;
+}
+.register-form,
+.login-form {
+  text-align: left;
+}
+.login-form input,
+.register-form input {
+  margin-top: 10px;
+  height: 30px;
+}
+.tests {
+  width: 80%;
+  border: 1px solid #787878;
+  margin: 30px;
+}

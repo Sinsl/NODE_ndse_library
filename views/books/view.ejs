@@ -20,15 +20,79 @@
 </div>
 </div>
 
-<div class="users">
-  <% if (!user) {%>
-    <div class="welcome">Добро пожаловать, Гость!</div>
-    <div class="lgn"><a href="/user/login" class="btn"> Вход </a></div>
-    <div class="lgn"><a href="/user/register" class="btn"> Регистрация </a></div>
-  <% } else { %>
-  <div class="welcome">Добро пожаловать, <%= user.nickname %>!</div>
-  <div>Перейти в <a href="/user/profile"> профиль </a>.</div>
-  <% } %>
-</div>
+<div class="messages-block">
+  <h4>Обсуждение</h4>
+  <div class="messages">
+    <div class="received" data-userid="John Doe">
+      <div class="message-header">
+        <span class="message-date">28.02 10:15</span>
+        <span class="message-name">Current User</span>
+      </div>
+      <div class="message-text">
+        <p>Этот комментарий является дефолтным на всех книжках</p>
+      </div>
+    </div>
+    <% if (arrMsg.length) { %>
+      <% arrMsg.map((el, idx) => { %>
+        <div class="received" data-userid="<%= el.userId %>">
+          <div class="message-header">
+            <span class="message-date"><%= el.datetime %></span>
+            <span class="message-name"><%= el.userName %></span>
+          </div>
+          <div class="message-text">
+            <p><%= el.textMessage %></p>
+          </div>
+        </div>
+      <% }) }%>
+  </div>
+  <div class="message-send-block">
+    <h4>Отправка сообщения</h4>
+    <% if (!user) { %>
+    <p>Для отправки комментария необходима авторизация</p>
+      <div class="message-send-auth">
+        <form action="/user/login" class="create-book login-form" method="post" >
+          <h4>Вход</h4>
+          <div>
+            <input type="email" name="email" placeholder="Email"/>  <br />
+          </div>
+          <div>
+            <input type="password" name="password" placeholder="Пароль"/> <br />
+          </div>
+          <input type="hidden" name="current_url" />
+          <div class="btn-box">
+            <button class="btn" type="submit" >Отправить</button> 
+          </div>
+        </form>
+        <form action="/user/register" class="create-book register-form" method="post" >
+          <h4>Регистрация</h4>
+          <div>
+            <input type="email" name="username" required placeholder="Email"/> <br />
+          </div>
+          <div>
+            <input type="password" name="password" required placeholder="Пароль"/> <br />
+          </div>
+          <input type="hidden" name="current_url" />
+          <div class="btn-box">
+            <button class="btn" type="submit" >Отправить</button> 
+          </div>
+        </form>
+      </div>
+    </div>
+    <% } else { %>
+    <form class="message-send">
+      <p  data-userid="<%= user.id %>"><%= user.nickname %></p>
+      <textarea class="story" name="story" rows="5" autocomplete="off" 
+          placeholder="It was a dark and stormy night..."></textarea>
+      <button class="btn" type="submit">Отправить</button>
+      <button class="btn" type="reset">Очистить</button>
+    </form>
+    <% } %>
+    <div class="tests"></div>
+  </div>
 
+  
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/socket.js"></script>
 <%- include('../port/layout-end') %>

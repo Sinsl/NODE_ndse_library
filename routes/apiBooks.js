@@ -5,11 +5,11 @@ const fs = require('fs')
 const counter = require('./requestCount')
 
 const Books = require('../models/books')
+const Message = require('../models/message')
 
 router.post('/',
   fileMulter.single('fileBook'),
   async (req, res) => {
-    console.log(req.body)
     const {title, description, authors, favorite, fileCover} = req.body
     let fileName = ""
     let filePath = ""
@@ -31,9 +31,7 @@ router.post('/',
 router.post('/update/:id',
   fileMulter.single('fileBook'),
   async (req, res) => {
-    console.log('Попали в метод пут правильно')
     const { id } = req.params
-    console.log(req.body)
     const { title, description, authors, favorite, fileCover } = req.body
     try {
       const books = await Books.findById(id).select('-__v');
@@ -59,7 +57,6 @@ router.post('/update/:id',
 })
 
 router.post('/delete/:id', async (req, res) => {
-  console.log('Попали в метод delete правильно')
     const { id } = req.params
     try {
       const books = await Books.findById(id).select('-__v');
@@ -78,6 +75,18 @@ router.post('/delete/:id', async (req, res) => {
     } catch (e) {
       res.status(500).json(e);
     }  
+})
+
+router.post('/:id/message', async (req, res ) => {
+  const { id } = req.params
+  const user = req.user
+  const {textMessage, datetime} = req.body
+  const newMessage = new Message({textMessage, roomId: id, userId: user.id, userName: user.nickname, datetime})
+  try {
+    await newMessage.save();
+  } catch (e) {
+    console.log(e)
+  }
 })
 
 module.exports = router

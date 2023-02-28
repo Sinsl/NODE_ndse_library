@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('../middleware/user')
-//const { autLogin, autRegister } = require('../middleware/authenticate')
 
 router.get('/', (req, res) => {
   res.render('users/user', {
@@ -16,12 +15,19 @@ router.get('/login', (req, res) => {
   })
 })
 
-router.post('/login', 
-//autLogin,
-passport.authenticate('local', { failureRedirect: '/user/login', failureMessage: true }),
+router.get('/current',
 (req, res) => {
+  res.json({id: req.user._id})
+})
+
+router.post('/login', 
+ passport.authenticate('local', { failureRedirect: '/user/login', failureMessage: true }),
+(req, res) => {
+  console.log('Авторизация')
   console.log(req.user)
-  res.redirect('/user')
+  const { current_url } = req.body
+  const redirectUrl = (current_url ? current_url : '/user')
+  res.redirect(redirectUrl)
 })
 
 router.get('/register', (req, res) => {
@@ -31,11 +37,13 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register',
-//autRegister,
 passport.authenticate('signup', { failureRedirect: '/user/register', failureMessage: true }),
 (req, res) => {
+  console.log('Регистрация')
   console.log(req.user)
-  res.redirect('/user')
+  const { current_url } = req.body
+  const redirectUrl = (current_url ? current_url : '/user')
+  res.redirect(redirectUrl)
 })
 
 router.get('/logout', function(req, res, next) {
